@@ -33,12 +33,72 @@ def ID3(examples, default):
     # create a root node
     root = Node(best_attr, {})
 
+def prune_iter(node, examples):
+  old_acc = test(node, examples)
+  old_node = node
+  freq = {}
+  if node.children != None:
+    for c in node.children.iteritems():
+      if c.label in freq: 
+        freq[c.label] += 1.0
+      else:
+        freq[c.label] = 1.0
+    node.label = max(freq, key=freq.get)]]
+    node.children = {}
+    new_acc = test(node, examples)
+    if new_acc >= old_acc:
+      return node
+  return old_node
+
+def breadth_first_search_complete(root):
+  q = []
+  output = {}
+  depthList = []
+  level = 0
+  q.append(root)
+  q.append(None)
+  while len(q) != 0:
+      n = q.pop(0)
+      if n == None:
+        level += 1
+        q.append(None)
+        if (q[0] == None):
+          break
+        else:
+          continue
+      if level in output:
+        output[level].append(n)
+      else:
+        output[level] = []
+        output[level].append(n)
+        
+      #output.append(n)
+      n.depth = level
+      children = n.children
+      if children != None:
+        for c in children.itervalues():
+          q.append(c)
+  return output
 
 def prune(node, examples):
   '''
   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
   to improve accuracy on the validation data; the precise pruning strategy is up to you.
-  '''
+  
+  pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
+                   - node removed only if pruned tree performs no worse than the original over the validation set
+                   - pruning continues until further pruning is harmful'''
+
+  dictLevel = breadth_first_search_complete(node)
+  maxLevel = max(dictLevel, key=int)
+
+  while maxLevel > 0:
+    dictLevel = breadth_first_search_complete(node)
+    maxLevel = max(dictLevel, key=int)
+    thatLevel = dictLevel[maxLevel]
+    for n in thatLevel:
+      prune_iter(n, examples)
+  return node
 
 
 def test(node, examples):
