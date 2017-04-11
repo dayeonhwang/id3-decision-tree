@@ -2,19 +2,22 @@ from node import Node
 import math
 import random 
 from collections import Counter
+from collections import defaultdict
+
+#global variable
+attributes = [key for key in examples.keys()] # a list of attributes
 
 def ID3(examples, default):
+  global attributes
+  
   '''
   Takes in an array of examples, and returns a tree (an instance of Node) 
   trained on the examples.  Each example is a dictionary of attribute:value pairs,
   and the target class variable is a special attribute with the name "Class".
   Any missing attributes are denoted with a value of "?"
   '''
-  # target value: attribute with the key "Class"
-  # label a leaf as 'Class'=0
-  # default : node -> default.lable = attr, default.children = {}
 
-  attributes = [key for key in examples.keys()] # a list of attributes
+  fill_missing_attr(examples)
   tree = Node()
   same_class_value = check_same_class(examples)
   best_attr = choose_best_attr(examples, attributes)
@@ -25,15 +28,26 @@ def ID3(examples, default):
     return default
   # 2. all examples have same class value -> tree is a leaf node
   else if check_same_class(examples):
-    tree.label = check_same_class
+    return check_same_class(examples)
   # 3. non-trivial split of examples is possible (all examples have same attribute values) -> mode class value
-  else if (not best_attr):
-    tree.label = target_attr_mode(examples, target_attr)
+  else if len(attributes)==0:
+    return mode(examples, {})
   # general case:
   else:
     best_attr = choose_best_attr(examples, attributes)
-    tree.label = best_attr
-    children = {}
+    tree.split_attr = best_attr
+    count=0
+    sub_examples = split_examples(examples, best_attr) #{val: {sub_examples}, val2: {sub_examples}, ...}
+    for val, sub_e in sub_examples.iteritems():
+      examples_i=sub_e
+      attributes.remove(best_attr)
+
+      subtree = ID3(sub_e, mode({best_attr:val}))
+      ...
+      count += 1
+  return tree
+
+
 
 def breadth_first_search_complete(root):
   '''
@@ -118,13 +132,24 @@ def test(node, examples):
 
   *arguments "examples": validation set
   '''
+  total_ex = len(examples)
+  accurate_ex = 0
 
+  for e in examples:
+    actual_class_val = e['Class']
+    computed_class_val = evaluate(node, e)
+    if computed_class_val == actual_class_val:
+      accurate_ex += 1
+
+  accuracy = float(accurate_ex / total_ex)
+  return accuracy
 
 def evaluate(node, example):
   '''
   Takes in a tree and one example.  Returns the Class value that the tree
   assigns to the example.
   '''
+
 
 def entropy(examples, target_attr):
   '''
@@ -202,6 +227,26 @@ def target_attr_mode(examples, target_attr):
   target_examples = [e[attr_index] for e in examples]
   return Counter(target_examples).most_common()[0][0] #value
 
+def mode(examples, target_dict):
+  '''
+  Return mode of Class value from remaining set of examples
+  Input: examples, target_dict (a dictionary of {attr1: val1, attr2: val2,...}) that nodes have
+  Output: mode ('democrat' or 'republic')
+  '''
+  # initialize dictionary
+  count = {}
+  for k in keys:
+    count[k] = 0
+  # select examples that have matching attribute & value from target_dict
+  for attr, val in target_dict.iteritems():
+    subset = [e for e in examples if e[attr] == val]
+  # count mode Class value
+  for s in subset:
+    attr_val = s["Class"] #label
+    count[attr_val] += 1
+  # return a key with the biggest value
+  return max(count, key=count.get)
+
 def fill_missing_attr(examples):
   '''
   Fill any missing attributes (denoted with a value of "?") with mode of attribute's value
@@ -215,7 +260,7 @@ def fill_missing_attr(examples):
 def split_examples(examples, target_attr):
   '''
   Split examples into a subset that has the target_attr as a key
-  Return a dictionary of all values pointing to a list of all the data with that attribute
+  Return a dictionary of {val: {sub_examples}, val2: {sub_examples}, ...}
   '''
   subset = {}
   target_val = [e[target_attr] for e in examples] # list of all values of target_attribute
