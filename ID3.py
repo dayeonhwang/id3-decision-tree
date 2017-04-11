@@ -15,48 +15,36 @@ def ID3(examples, default):
   # default : node -> default.lable = attr, default.children = {}
 
   attributes = [key for key in examples.keys()] # a list of attributes
+  tree = Node()
+  same_class_value = check_same_class(examples)
+  best_attr = choose_best_attr(examples, attributes)
+
   # corner cases
   # 1. example set is empty
   if len(examples) == 0:
-    return default 
-  # 2. all examples have same class value
+    return default
+  # 2. all examples have same class value -> tree is a leaf node
   else if check_same_class(examples):
-    top_class = examples[0][-1]
-    tree = Node(top_class, {})
-    return tree
+    tree.label = check_same_class
   # 3. non-trivial split of examples is possible (all examples have same attribute values) -> mode class value
-  else if:
-    return target_attr_mode(examples, attributes, target_attr)
+  else if (not best_attr):
+    tree.label = target_attr_mode(examples, target_attr)
   # general case:
   else:
-    best_attr = choose_attr(examples, attributes)
-    # create a root node
-    root = Node(best_attr, {})
-
-def prune_iter(node, examples):
-  old_acc = test(node, examples)
-  old_node = node
-  freq = {}
-  if node.children != None:
-    for c in node.children.iteritems():
-      if c.label in freq: 
-        freq[c.label] += 1.0
-      else:
-        freq[c.label] = 1.0
-    node.label = max(freq, key=freq.get)]]
-    node.children = {}
-    new_acc = test(node, examples)
-    if new_acc >= old_acc:
-      return node
-  return old_node
+    best_attr = choose_best_attr(examples, attributes)
+    tree.label = best_attr
+    children = {}
 
 def breadth_first_search_complete(root):
+  '''
+  Takes a root node and returns a dictionary of {level, [node @ the level]}
+  '''
   q = []
   output = {}
   depthList = []
   level = 0
   q.append(root)
-  q.append(None)
+  q.append(None) 
   while len(q) != 0:
       n = q.pop(0)
       if n == None:
@@ -80,32 +68,57 @@ def breadth_first_search_complete(root):
           q.append(c)
   return output
 
+def prune_iter(node, examples):
+  '''
+  Takes a node and compares accuracy of tree w/ or w/o the node.
+  Keeps pruning by removing the node if accuracy of tree w/o the node is bigger than that of w/ the node
+  and replacing the node with its most popular class(mode)
+  '''
+  old_acc = test(node, examples)
+  old_node = node
+  freq = {}
+  if node.children != None: # how about case of leaf??
+    for c in node.children.iteritems():
+      if c.label in freq: 
+        freq[c.label] += 1.0
+      else:
+        freq[c.label] = 1.0
+
+    node.label = max(freq, key=freq.get)]]
+    node.children = {}
+    new_acc = test(node, examples)
+    if new_acc >= old_acc:
+      return node
+  return old_node
+
 def prune(node, examples):
   '''
   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
   to improve accuracy on the validation data; the precise pruning strategy is up to you.
   
-  pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
-                   - node removed only if pruned tree performs no worse than the original over the validation set
-                   - pruning continues until further pruning is harmful'''
+  *pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
+                    - node removed only if pruned tree performs no worse than the original over the validation set
+                    - pruning continues until further pruning is harmful (reduced error pruning algorithm)'''
 
-  dictLevel = breadth_first_search_complete(node)
+  dictLevel = breadth_first_search_complete(node) # dictionary : {level, node @ the level}
   maxLevel = max(dictLevel, key=int)
 
   while maxLevel > 0:
     dictLevel = breadth_first_search_complete(node)
     maxLevel = max(dictLevel, key=int)
-    thatLevel = dictLevel[maxLevel]
-    for n in thatLevel:
+    nodesAtLevel = dictLevel[maxLevel]
+    for n in nodesAtLevel: # leaves
       prune_iter(n, examples)
   return node
-
 
 def test(node, examples):
   '''
   Takes in a trained tree and a test set of examples.  Returns the accuracy (fraction
   of examples the tree classifies correctly).
+
+  *arguments "examples": validation set
   '''
+
 
 def evaluate(node, example):
   '''
@@ -156,9 +169,9 @@ def info_gain(examples, target_attr):
   # subtract entropy of target_attr from entropy of entire data w.r.t target_attr
   return (prior_entropy - sub_entropy)
 
-def choose_attr(examples, attributes):
+def choose_best_attr(examples, attributes):
   '''
-  Choose which attribute to split on
+  Choose which attribute to split on (attr w/ max info_gain)
   '''
   max_info_gain = 0
   curr_info_gain = 0
@@ -172,32 +185,40 @@ def choose_attr(examples, attributes):
 def check_same_class(examples):
   '''
   Check if all examples have the same class value
+  Return None(if don't have same class value) or value of the attribute
   '''
-  top_class = examples[0][-1]
-  for e in examples:
-    if e[-1] != top_class:
-      return False
-  return True
+  first_ex_value = examples[0][0]
+  for e in examples[1:]:
+    if e[0] != first_ex_value:
+      return None
+  return first_ex_value
 
-def check_same_attr_val(examples, attributes):
-  '''
-  Check if all examples have same attribute values
-  '''
-
-def target_attr_mode(examples, attributes, target_attr):
+def target_attr_mode(examples, target_attr):
   '''
   Get mode of target attribute's value
   '''
-  attr_index = attributes.index(target_attr) # index of target_attr from first row of examples (= a list of attributes)
+  attributes = [key for key in examples.keys()]
+  attr_index = attributes.index(target_attr)
   target_examples = [e[attr_index] for e in examples]
-  return Counter(target_examples).most_common()[0][0]
+  return Counter(target_examples).most_common()[0][0] #value
 
 def fill_missing_attr(examples):
   '''
-  Fill any missing attributes (denoted with a value of "?") with mode of attribute's value or 0.5
+  Fill any missing attributes (denoted with a value of "?") with mode of attribute's value
   '''
   for e in examples:
     for attr, attr_val in e.iteritems():
       if attr_val == '?':
         attr_val = target_attr_mode(examples, attr)
   return examples
+
+def split_examples(examples, target_attr):
+  '''
+  Split examples into a subset that has the target_attr as a key
+  Return a dictionary of all values pointing to a list of all the data with that attribute
+  '''
+  subset = {}
+  target_val = [e[target_attr] for e in examples] # list of all values of target_attribute
+  for val in target_val:
+    subset[val] = [e for e in examples if e[target_attr] == val]
+  return subset
