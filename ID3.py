@@ -50,81 +50,49 @@ def ID3(examples, default):
     tree.children = children
   return tree
 
-def breadth_first_search_complete(root):
-  '''
-  Takes a root node and returns a dictionary of {level, [node @ the level]}
-  '''
-  q = []
-  output = {}
-  depthList = []
-  level = 0
-  q.append(root)
-  q.append(None) 
-  while len(q) != 0:
-      n = q.pop(0)
-      if n == None:
-        level += 1
-        q.append(None)
-        if (q[0] == None):
-          break
-        else:
-          continue
-      if level in output:
-        output[level].append(n)
-      else:
-        output[level] = []
-        output[level].append(n)
-        
-      #output.append(n)
-      n.depth = level
-      children = n.children
-      if children != None:
-        for c in children.itervalues():
-          q.append(c)
-  return output
-
-def prune_iter(node, examples):
-  '''
-  Takes a node and compares accuracy of tree w/ or w/o the node.
-  Keeps pruning by removing the node if accuracy of tree w/o the node is bigger than that of w/ the node
-  and replacing the node with its most popular class(mode)
-  '''
-  old_acc = test(node, examples)
-  old_node = node
-  freq = {}
-  if node.children != None: # how about case of leaf??
-    for c in node.children.iteritems():
-      if c.label in freq: 
-        freq[c.label] += 1.0
-      else:
-        freq[c.label] = 1.0
-
-    node.label = max(freq, key=freq.get)]]
-    node.children = {}
-    new_acc = test(node, examples)
-    if new_acc >= old_acc:
-      return node
-  return old_node
-
 def prune(node, examples):
   '''
   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
   to improve accuracy on the validation data; the precise pruning strategy is up to you.
   
-  *pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
-                    - node removed only if pruned tree performs no worse than the original over the validation set
-                    - pruning continues until further pruning is harmful (reduced error pruning algorithm)'''
+  *pruning strategy
+  - start from node -> node's children (top to bottom)
+  - compare accuracy before/after deleting each node -> delete if accuracy is higher
+  - greedily grab each node @ each level and repeat recursively'''
 
-  dictLevel = breadth_first_search_complete(node) # dictionary : {level, node @ the level}
-  maxLevel = max(dictLevel, key=int)
+  numDeletedNode = 0 # keep track of the number of nodes deleted during pruning
+  q = []  # queue of nodes @ each level
+  output = {}
+  q.append(node)
+  original_node = node
+  while len(q) != 0:
+    n = q.pop(0) #first node
+    if (n != None && n.label != None): # if we have nodes & haven't reached a leaf node yet
+      
+      # save the current node's state before deleting it
+      old_acc = test(n, examples)
+      old_node = n
+      old_children = n.children
+      
+      # proceed to delete it
+      n.label = n.mode
+      n.children = {}
+      new_acc = test(n, examples)
+      
+      # if decide to delete it
+      if new_acc >= old_acc:
+        numDeletedNode += 1
+        continue
 
-  while maxLevel > 0:
-    dictLevel = breadth_first_search_complete(node)
-    maxLevel = max(dictLevel, key=int)
-    nodesAtLevel = dictLevel[maxLevel]
-    for n in nodesAtLevel: # leaves
-      prune_iter(n, examples)
-  return node
+      # if decide to keep it
+      else:
+        #add children
+        if old_children != None:
+          for c in old_children.itervalues():
+            q.append(c)
+
+    print int(numDeletedNode)
+    return original_node
 
 def test(node, examples):
   '''
@@ -145,7 +113,7 @@ def test(node, examples):
   accuracy = float(accurate_ex / total_ex)
   return accuracy
 
-  def evaluate(node, example):
+def evaluate(node, example):
   '''
   Takes in a tree and one example.  Returns the Class value that the tree
   assigns to the example.
@@ -228,30 +196,9 @@ def target_attr_mode(examples, target_attr):
   '''
   Get mode of target attribute's value
   '''
-  attributes = [key for key in examples.keys()]
   attr_index = attributes.index(target_attr)
   target_examples = [e[attr_index] for e in examples]
   return Counter(target_examples).most_common()[0][0] #value
-
-def mode(examples, target_dict):
-  '''
-  Return mode of Class value from remaining set of examples
-  Input: examples, target_dict (a dictionary of {attr1: val1, attr2: val2,...}) that nodes have
-  Output: mode ('democrat' or 'republic')
-  '''
-  # initialize dictionary
-  count = {}
-  for k in keys:
-    count[k] = 0
-  # select examples that have matching attribute & value from target_dict
-  for attr, val in target_dict.iteritems():
-    subset = [e for e in examples if e[attr] == val]
-  # count mode Class value
-  for s in subset:
-    attr_val = s["Class"] #label
-    count[attr_val] += 1
-  # return a key with the biggest value
-  return max(count, key=count.get)
 
 def mode(examples):
   '''
