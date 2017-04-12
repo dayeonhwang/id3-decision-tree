@@ -9,7 +9,6 @@ attributes = [key for key in examples.keys()] # a list of attributes
 
 def ID3(examples, default):
   global attributes
-  
   '''
   Takes in an array of examples, and returns a tree (an instance of Node) 
   trained on the examples.  Each example is a dictionary of attribute:value pairs,
@@ -19,35 +18,37 @@ def ID3(examples, default):
 
   fill_missing_attr(examples)
   tree = Node()
+  tree.mode = mode(examples)
   same_class_value = check_same_class(examples)
   best_attr = choose_best_attr(examples, attributes)
 
   # corner cases
   # 1. example set is empty
   if len(examples) == 0:
-    return default
+    tree.label = default
+
   # 2. all examples have same class value -> tree is a leaf node
   else if check_same_class(examples):
-    return check_same_class(examples)
+    tree.label = check_same_class(examples)
+
   # 3. non-trivial split of examples is possible (all examples have same attribute values) -> mode class value
   else if len(attributes)==0:
-    return mode(examples, {})
+    tree.label = mode(examples)
+
   # general case:
   else:
     best_attr = choose_best_attr(examples, attributes)
     tree.split_attr = best_attr
-    count=0
-    sub_examples = split_examples(examples, best_attr) #{val: {sub_examples}, val2: {sub_examples}, ...}
+    tree.split_attr_index = attributes.index(best_attr)
+    tree.children = {}
+    sub_examples = split_examples(examples, best_attr) #{val1: {sub_examples_1}, val2: {sub_examples_2}, ...}
+
     for val, sub_e in sub_examples.iteritems():
-      examples_i=sub_e
+      children[val] = ID3(examples, mode(sub_e))
       attributes.remove(best_attr)
 
-      subtree = ID3(sub_e, mode({best_attr:val}))
-      ...
-      count += 1
+    tree.children = children
   return tree
-
-
 
 def breadth_first_search_complete(root):
   '''
@@ -144,12 +145,17 @@ def test(node, examples):
   accuracy = float(accurate_ex / total_ex)
   return accuracy
 
-def evaluate(node, example):
+  def evaluate(node, example):
   '''
   Takes in a tree and one example.  Returns the Class value that the tree
   assigns to the example.
   '''
+  while len(node.children)!=0: # while you havent reached a leaf
+    best_attr = node.split_attr # find which attribute you split on
+    ex_split_val = example[best_attr] # find what value the example had for this attribute
+    node = node.children[ex_split_val] # go to the child node whose value matches
 
+  return node.label
 
 def entropy(examples, target_attr):
   '''
@@ -245,6 +251,23 @@ def mode(examples, target_dict):
     attr_val = s["Class"] #label
     count[attr_val] += 1
   # return a key with the biggest value
+  return max(count, key=count.get)
+
+def mode(examples):
+  '''
+  Return mode of Class value from remaining set of examples
+  Input: examples
+  Output: mode ('democrat' or 'republic')
+  '''
+  # initialize dictionary
+  count = {}
+  for e in examples:
+    if e[label] in count:
+      count[e['Class']] += 1.0
+    else:
+      count[e['Class']] = 1.0
+
+  # return key with the biggest value
   return max(count, key=count.get)
 
 def fill_missing_attr(examples):
