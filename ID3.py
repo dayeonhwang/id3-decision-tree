@@ -5,7 +5,6 @@ from collections import Counter
 from collections import defaultdict
 from copy import deepcopy, copy
 import parse
-import unittest
 
 #global variable
 attributes = [] # a list of attributes
@@ -20,10 +19,9 @@ def ID3(examples, default):
   and the target class variable is a special attribute with the name "Class".
   Any missing attributes are denoted with a value of "?"
   '''
-
-  fill_missing_attr(examples)
   tree = Node()
-  tree.mode = mode(examples, tree)
+  processed = read_data(examples)
+  tree.mode = mode(tree, examples)
   
   if flag == 0:
     attributes = [key for key in examples[0]]
@@ -57,15 +55,17 @@ def ID3(examples, default):
     #otherwise, continue
     else:
       tree.split_attr = best_attr
-      tree.split_attr_index = attributes.index(best_attr)
+      #tree.split_attr_index = attributes.index(best_attr)
+      new_examples = fill_missing_attr(examples, best_attr)
       children = {}
-      sub_examples = split_examples(examples, best_attr) #{val1: {sub_examples_1}, val2: {sub_examples_2}, ...}
+      sub_examples = split_examples(new_examples, best_attr) #{val1: {sub_examples_1}, val2: {sub_examples_2}, ...}
 
       for val, sub_e in sub_examples.iteritems():
         if best_attr in attributes:
           attributes.remove(best_attr)
         children[val] = ID3(sub_e, mode(tree, sub_e))
       tree.children = children
+  flag = 0
   return tree
 
 # def prune(node, examples):
@@ -125,7 +125,7 @@ def prune_iter(node, examples):
     new_node.children = {}
     new_acc = test(new_node, examples)
     if new_acc > old_acc or (new_acc==old_acc and new_node.unclearMode==0):
-      print "new node", new_node.children
+      #print "new node", new_node.children
       node.label=node.mode
       node.children={}
       return node
@@ -152,7 +152,7 @@ def prune(node, examples):
     if len(children) != 0:
       for c in children.itervalues():
         q.append(c)
-  print node.children
+  #print node.children
   return node
 
 def test(node, examples):
@@ -167,14 +167,14 @@ def test(node, examples):
 
   for e in examples:
     actual_class_val = e['Class']
-    computed_class_val = evaluate(node, e)
+    computed_class_val = evaluate(node, e) ####
     if computed_class_val == actual_class_val:
       accurate_ex += 1
 
   accuracy = accurate_ex / float(total_ex)
-  print total_ex
-  print accurate_ex
-  print accuracy
+  #print total_ex
+  #print accurate_ex
+  #print accuracy
   return accuracy
 
 def evaluate(node, example):
@@ -186,10 +186,10 @@ def evaluate(node, example):
   while len(node.children)!=0: # while you havent reached a leaf
     best_attr = node.split_attr # find which attribute you split on
     ex_split_val = example[best_attr] # find what value the example had for this attribute
-    node = node.children[ex_split_val] # go to the child node whose value matches
+    node = node.children[ex_split_val] # go to the child node whose value matches ####
     nodeVisited += 1
 
-  print "number of node visited:", nodeVisited
+  #print "number of node visited:", nodeVisited
   return node.label
 
 def entropy(examples, target_attr):
@@ -281,14 +281,6 @@ def check_same_value(examples, attr):
       return False
   return True
 
-def target_attr_mode(examples, target_attr):
-  '''
-  Get mode of target attribute's value
-  '''
-  attr_index = attributes.index(target_attr)
-  target_examples = [e[attr_index] for e in examples]
-  return Counter(target_examples).most_common()[0][0] #value
-
 def mode(node, examples):
   '''
   Return mode of Class value from remaining set of examples
@@ -306,22 +298,61 @@ def mode(node, examples):
   max_num = max(count)
   if len(([k for k, v in count.items() if v == max_num]))>1:
     node.unclearMode=1
-    print "unclearMode"
+    #print "unclearMode"
     
   # if sum(1 for x in count.values() if x==max_num)>1:
   #   node.unClearMode=1
   # return key with the biggest value
   return max(count, key=count.get)
 
-def fill_missing_attr(examples):
+def target_attr_mode(examples, target_attr):
+  '''
+  Get mode of target attribute's value
+  '''
+  target_examples = [e[target_attr] for e in examples]
+  
+  value = {} # dictionary of {attr_val: example}
+  for e in examples:
+    attr_val = e[target_attr]
+    if attr_val is not None:
+      if attr_val in value.keys():
+        value[attr_val].append(e)
+      else:
+        value[attr_val] = [e]
+  try:
+    mode = max(value.items(), key=lambda x: len(x[1]))[0]
+  except (ValueError):
+    mode = None
+
+  #return Counter(target_examples).most_common()[0][0]
+  return mode
+
+def fill_missing_attr(examples, attribute):
   '''
   Fill any missing attributes (denoted with a value of "?") with mode of attribute's value
   '''
-  for e in examples:
-    for attr, attr_val in e.iteritems():
-      if attr_val == '?':
-        attr_val = target_attr_mode(examples, attr)
-  return examples
+  new_examples = deepcopy(examples)
+  replacement_val = target_attr_mode(examples, attribute)
+
+  for e in new_examples:
+    if e[attribute] is None:
+      e[attribute] = replacement_val
+    
+  return new_examples
+
+def read_data(examples):
+  '''
+  Proceed data each row and replace '?' with value None
+  '''
+  new_examples = examples
+  for e in new_examples:
+    # change each line of data into an array
+    for v in e.values():
+      if v == "?":
+        v = None
+      else:
+        continue
+  return new_examples
 
 def split_examples(examples, target_attr):
   '''
