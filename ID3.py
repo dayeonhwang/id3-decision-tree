@@ -20,8 +20,8 @@ def ID3(examples, default):
   Any missing attributes are denoted with a value of "?"
   '''
   tree = Node()
-  processed = read_data(examples)
   tree.mode = mode(tree, examples)
+  examples = fill_missing_attr(examples)
   
   if flag == 0:
     attributes = [key for key in examples[0]]
@@ -46,7 +46,7 @@ def ID3(examples, default):
     best_attr = choose_best_attr(examples, attributes)
     if (best_attr == 'Class'):
       best_attr = None
-    print 'choose best attr = ' + str(best_attr)
+      return None
     #check if best_attr of all examples are identical
     if (best_attr == None):
       tree.label = mode(tree, examples)
@@ -55,16 +55,16 @@ def ID3(examples, default):
     #otherwise, continue
     else:
       tree.split_attr = best_attr
-      #tree.split_attr_index = attributes.index(best_attr)
-      new_examples = fill_missing_attr(examples, best_attr)
       children = {}
-      sub_examples = split_examples(new_examples, best_attr) #{val1: {sub_examples_1}, val2: {sub_examples_2}, ...}
+      sub_examples = split_examples(examples, best_attr) #{val1: {sub_examples_1}, val2: {sub_examples_2}, ...}
 
       for val, sub_e in sub_examples.iteritems():
         if best_attr in attributes:
           attributes.remove(best_attr)
         children[val] = ID3(sub_e, mode(tree, sub_e))
       tree.children = children
+      if len(children) == 0:
+        raise Exception('LOL')
   flag = 0
   return tree
 
@@ -124,7 +124,7 @@ def prune_iter(node, examples):
     new_node.label = new_node.mode
     new_node.children = {}
     new_acc = test(new_node, examples)
-    if new_acc > old_acc or (new_acc==old_acc and new_node.unclearMode==0):
+    if new_acc > old_acc:
       #print "new node", new_node.children
       node.label=node.mode
       node.children={}
@@ -186,10 +186,14 @@ def evaluate(node, example):
   while len(node.children)!=0: # while you havent reached a leaf
     best_attr = node.split_attr # find which attribute you split on
     ex_split_val = example[best_attr] # find what value the example had for this attribute
+    if ex_split_val =='?':
+      if not 'y' in node.children.keys():
+        print 'error!'
+        print  node.children
+      ex_split_val = 'y'
     node = node.children[ex_split_val] # go to the child node whose value matches ####
     nodeVisited += 1
 
-  #print "number of node visited:", nodeVisited
   return node.label
 
 def entropy(examples, target_attr):
@@ -327,32 +331,17 @@ def target_attr_mode(examples, target_attr):
   #return Counter(target_examples).most_common()[0][0]
   return mode
 
-def fill_missing_attr(examples, attribute):
+def fill_missing_attr(examples):
   '''
   Fill any missing attributes (denoted with a value of "?") with mode of attribute's value
   '''
-  new_examples = deepcopy(examples)
-  replacement_val = target_attr_mode(examples, attribute)
+  for e in examples:
+    for key, val in e.iteritems():
+      if e[key] == "?":
 
-  for e in new_examples:
-    if e[attribute] is None:
-      e[attribute] = replacement_val
+        e[key] = 'n'
     
-  return new_examples
-
-def read_data(examples):
-  '''
-  Proceed data each row and replace '?' with value None
-  '''
-  new_examples = examples
-  for e in new_examples:
-    # change each line of data into an array
-    for v in e.values():
-      if v == "?":
-        v = None
-      else:
-        continue
-  return new_examples
+  return examples
 
 def split_examples(examples, target_attr):
   '''
