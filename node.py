@@ -6,4 +6,4 @@ class Node:
         self.split_attr_val = None # (int) value of splitting attribute; None if leaf node
         self.mode = None # (int) mode output among examples sorted to the node
         self.children = {} # (dictionary) {val1: node, val2: node, ...} -> sub_examples_i : node
-        self.depth = None # (int) depth of the node
+        self.unclearMode = 0 # (bool) if it is clear to have a mode or not

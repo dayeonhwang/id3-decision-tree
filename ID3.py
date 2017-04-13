@@ -3,6 +3,9 @@ import math
 import random 
 from collections import Counter
 from collections import defaultdict
+from copy import deepcopy, copy
+import parse
+import unittest
 
 #global variable
 attributes = [] # a list of attributes
@@ -20,7 +23,7 @@ def ID3(examples, default):
 
   fill_missing_attr(examples)
   tree = Node()
-  tree.mode = mode(examples)
+  tree.mode = mode(examples, tree)
   
   if flag == 0:
     attributes = [key for key in examples[0]]
@@ -39,18 +42,18 @@ def ID3(examples, default):
 
   # 3. non-trivial split of examples is possible (all examples have same attribute values) -> mode class value
   elif len(attributes) == 0:
-    tree.label = mode(examples)
+    tree.label = mode(tree, examples)
   # general case:
   else:
     best_attr = choose_best_attr(examples, attributes)
     if (best_attr == 'Class'):
       best_attr = None
-    print 'chose best attr = ' + str(best_attr)
+    print 'choose best attr = ' + str(best_attr)
     #check if best_attr of all examples are identical
     if (best_attr == None):
-      tree.label = mode(examples)
+      tree.label = mode(tree, examples)
     elif check_same_value(examples, best_attr) == True:
-      tree.label = mode(examples)
+      tree.label = mode(tree, examples)
     #otherwise, continue
     else:
       tree.split_attr = best_attr
@@ -61,51 +64,96 @@ def ID3(examples, default):
       for val, sub_e in sub_examples.iteritems():
         if best_attr in attributes:
           attributes.remove(best_attr)
-        children[val] = ID3(examples, mode(sub_e))
+        children[val] = ID3(sub_e, mode(tree, sub_e))
       tree.children = children
   return tree
+
+# def prune(node, examples):
+#   '''
+#   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
+#   to improve accuracy on the validation data; the precise pruning strategy is up to you.
+#
+#   *pruning strategy
+#   - start from node -> node's children (top to bottom)
+#   - compare accuracy before/after deleting each node -> delete if accuracy is higher
+#   - greedily grab each node @ each level and repeat recursively'''
+#
+#   numDeletedNode = 0 # keep track of the number of nodes deleted during pruning
+#   q = []  # queue of nodes @ each level
+#   output = {}
+#   q.append(node)
+#   while (len(q) != 0):
+#     n = q.pop(0) #first node
+#     #if (n != None and n.label != None): # if we have nodes & haven't reached a leaf node yet
+#
+#     # save the current node's state before deleting it
+#     old_acc = test(n, examples)
+#     old_node = n
+#     old_children = n.children
+#
+#     # proceed to delete it
+#     n.label = n.mode
+#     n.children = {}
+#     new_acc = test(n, examples)
+#
+#     # if decide to delete it
+#     if new_acc >= old_acc and not n.unclearMode:
+#       numDeletedNode += 1
+#       continue
+#
+#     # if decide to keep it
+#     else:
+#       #add children
+#       if old_children != None:
+#         for c in old_children.itervalues():
+#           q.append(c)
+#
+#     return node
+
+def prune_iter(node, examples):
+  '''
+  Takes a node and compares accuracy of tree w/ or w/o the node.
+  Keeps pruning by removing the node if accuracy of tree w/o the node is bigger than that of w/ the node
+  and replacing the node with its most popular class(mode)
+  '''
+  old_acc = test(node, examples)
+  new_node = deepcopy(node)
+
+  if len(new_node.children) != 0:  # how about case of leaf??
+
+    new_node.label = new_node.mode
+    new_node.children = {}
+    new_acc = test(new_node, examples)
+    if new_acc > old_acc or (new_acc==old_acc and new_node.unclearMode==0):
+      print "new node", new_node.children
+      node.label=node.mode
+      node.children={}
+      return node
+  return node
+
 
 def prune(node, examples):
   '''
   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
   to improve accuracy on the validation data; the precise pruning strategy is up to you.
-  
-  *pruning strategy
-  - start from node -> node's children (top to bottom)
-  - compare accuracy before/after deleting each node -> delete if accuracy is higher
-  - greedily grab each node @ each level and repeat recursively'''
 
-  numDeletedNode = 0 # keep track of the number of nodes deleted during pruning
-  q = []  # queue of nodes @ each level
-  output = {}
+  *pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
+                    - node removed only if pruned tree performs no worse than the original over the validation set
+                    - pruning continues until further pruning is harmful (reduced error pruning algorithm)'''
+
+  q = []
+  output = []
   q.append(node)
-  while (len(q) != 0):
-    n = q.pop(0) #first node
-    #if (n != None and n.label != None): # if we have nodes & haven't reached a leaf node yet
-      
-    # save the current node's state before deleting it
-    old_acc = test(n, examples)
-    old_node = n
-    old_children = n.children
-      
-    # proceed to delete it
-    n.label = n.mode
-    n.children = {}
-    new_acc = test(n, examples)
-      
-    # if decide to delete it
-    if new_acc >= old_acc:
-      numDeletedNode += 1
-      continue
+  while len(q) != 0:
+    n = q.pop(0)
+    n = prune_iter(n, examples)
 
-    # if decide to keep it
-    else:
-      #add children
-      if old_children != None:
-        for c in old_children.itervalues():
-          q.append(c)
-
-    return node
+    children = n.children
+    if len(children) != 0:
+      for c in children.itervalues():
+        q.append(c)
+  print node.children
+  return node
 
 def test(node, examples):
   '''
@@ -159,7 +207,7 @@ def entropy(examples, target_attr):
       freq[e[target_attr]] = 1.0
 
   for f in freq.values():
-    entropy += (-f/len(examples)) * math.log(f/len(examples), 2)
+    entropy += (-f/float(len(examples))) * math.log(f/float(len(examples)), 2)
   return entropy
 
 def info_gain(examples, target_attr):
@@ -180,9 +228,9 @@ def info_gain(examples, target_attr):
 
   # calculate sum of entropy for each subset * prob
   for val, f_val in freq.iteritems():
-    prob = f_val / sum(freq.values())
+    prob = f_val / float(sum(freq.values()))
     sub_examples = [e for e in examples if e[target_attr] == val]
-    sub_entropy += prob * entropy(sub_examples, target_attr)
+    sub_entropy += float(prob) * entropy(sub_examples, target_attr)
 
   # subtract entropy of target_attr from entropy of entire data w.r.t target_attr
   return (prior_entropy - sub_entropy)
@@ -241,11 +289,11 @@ def target_attr_mode(examples, target_attr):
   target_examples = [e[attr_index] for e in examples]
   return Counter(target_examples).most_common()[0][0] #value
 
-def mode(examples):
+def mode(node, examples):
   '''
   Return mode of Class value from remaining set of examples
   Input: examples
-  Output: mode ('democrat' or 'republic')
+  Output: mode ('democrat' or 'republic' or 'none')
   '''
   # initialize dictionary
   count = {}
@@ -255,6 +303,13 @@ def mode(examples):
     else:
       count[e['Class']] = 1.0
 
+  max_num = max(count)
+  if len(([k for k, v in count.items() if v == max_num]))>1:
+    node.unclearMode=1
+    print "unclearMode"
+    
+  # if sum(1 for x in count.values() if x==max_num)>1:
+  #   node.unClearMode=1
   # return key with the biggest value
   return max(count, key=count.get)
 
