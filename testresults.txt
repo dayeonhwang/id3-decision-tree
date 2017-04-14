@@ -1,0 +1,708 @@
+ID3 test succeeded.
+pruning test succeeded.
+testing on train data succeeded.
+testing on test data succeeded.
+testID3AndTest succeeded.
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.798165137615
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.908256880734
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.844036697248
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.825688073394
+training accuracy:  1.0
+validation accuracy:  0.807339449541
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.816513761468
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.779816513761
+training accuracy:  1.0
+validation accuracy:  0.908256880734
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.899082568807
+training accuracy:  1.0
+validation accuracy:  0.816513761468
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.940092165899
+pruned tree validation accuracy:  0.816513761468
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.908256880734
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.853211009174
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.917431192661
+training accuracy:  1.0
+validation accuracy:  0.963302752294
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.963302752294
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.926605504587
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.926605504587
+no pruning test accuracy:  0.899082568807
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.834862385321
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.953917050691
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.917431192661
+training accuracy:  1.0
+validation accuracy:  0.816513761468
+test accuracy:  0.825688073394
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.816513761468
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.807339449541
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.816513761468
+no pruning test accuracy:  0.807339449541
+training accuracy:  1.0
+validation accuracy:  0.779816513761
+test accuracy:  0.807339449541
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.825688073394
+pruned tree test accuracy:  0.816513761468
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.834862385321
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.953917050691
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.917431192661
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.798165137615
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.798165137615
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.807339449541
+no pruning test accuracy:  0.844036697248
+training accuracy:  1.0
+validation accuracy:  0.834862385321
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.94930875576
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.908256880734
+training accuracy:  1.0
+validation accuracy:  0.926605504587
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.926605504587
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.834862385321
+test accuracy:  0.935779816514
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.834862385321
+pruned tree test accuracy:  0.926605504587
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.834862385321
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.807339449541
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.816513761468
+no pruning test accuracy:  0.899082568807
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.935779816514
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.798165137615
+training accuracy:  1.0
+validation accuracy:  0.908256880734
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.798165137615
+training accuracy:  1.0
+validation accuracy:  0.935779816514
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.94495412844
+pruned tree test accuracy:  0.834862385321
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.834862385321
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.908256880734
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.834862385321
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.770642201835
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.844036697248
+pruned tree test accuracy:  0.770642201835
+no pruning test accuracy:  0.834862385321
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.94495412844
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.926605504587
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.926605504587
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.844036697248
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.798165137615
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.825688073394
+pruned tree test accuracy:  0.834862385321
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.825688073394
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.807339449541
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.798165137615
+no pruning test accuracy:  0.917431192661
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.798165137615
+pruned tree train accuracy:  0.958525345622
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.816513761468
+training accuracy:  1.0
+validation accuracy:  0.853211009174
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.862385321101
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.834862385321
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.807339449541
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.816513761468
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.816513761468
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.825688073394
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.816513761468
+no pruning test accuracy:  0.844036697248
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.889908256881
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.825688073394
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.788990825688
+training accuracy:  1.0
+validation accuracy:  0.853211009174
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.995391705069
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.816513761468
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.834862385321
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.779816513761
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.807339449541
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.825688073394
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.94495412844
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.844036697248
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.908256880734
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.834862385321
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.917431192661
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.935779816514
+no pruning test accuracy:  0.917431192661
+training accuracy:  1.0
+validation accuracy:  0.834862385321
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.908256880734
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.816513761468
+training accuracy:  1.0
+validation accuracy:  0.926605504587
+test accuracy:  0.917431192661
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.926605504587
+pruned tree test accuracy:  0.926605504587
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.807339449541
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.816513761468
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.834862385321
+training accuracy:  1.0
+validation accuracy:  0.853211009174
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.94930875576
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.844036697248
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.871559633028
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.834862385321
+test accuracy:  0.908256880734
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.862385321101
+pruned tree test accuracy:  0.917431192661
+no pruning test accuracy:  0.899082568807
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.899082568807
+no pruning test accuracy:  0.853211009174
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.788990825688
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.871559633028
+pruned tree test accuracy:  0.807339449541
+no pruning test accuracy:  0.825688073394
+training accuracy:  1.0
+validation accuracy:  0.880733944954
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.880733944954
+pruned tree test accuracy:  0.844036697248
+no pruning test accuracy:  0.825688073394
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.899082568807
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.889908256881
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.944700460829
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.844036697248
+pruned tree test accuracy:  0.862385321101
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.908256880734
+training accuracy:  1.0
+validation accuracy:  0.899082568807
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.963133640553
+pruned tree validation accuracy:  0.899082568807
+pruned tree test accuracy:  0.853211009174
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.917431192661
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.986175115207
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.880733944954
+training accuracy:  1.0
+validation accuracy:  0.871559633028
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.972350230415
+pruned tree validation accuracy:  0.889908256881
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.917431192661
+training accuracy:  1.0
+validation accuracy:  0.807339449541
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.967741935484
+pruned tree validation accuracy:  0.816513761468
+pruned tree test accuracy:  0.807339449541
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.862385321101
+pruned tree train accuracy:  0.958525345622
+pruned tree validation accuracy:  0.917431192661
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.844036697248
+training accuracy:  1.0
+validation accuracy:  0.889908256881
+test accuracy:  0.908256880734
+pruned tree train accuracy:  0.981566820276
+pruned tree validation accuracy:  0.908256880734
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.889908256881
+training accuracy:  1.0
+validation accuracy:  0.752293577982
+test accuracy:  0.853211009174
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.807339449541
+pruned tree test accuracy:  0.880733944954
+no pruning test accuracy:  0.862385321101
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.880733944954
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.844036697248
+pruned tree test accuracy:  0.908256880734
+no pruning test accuracy:  0.926605504587
+training accuracy:  1.0
+validation accuracy:  0.825688073394
+test accuracy:  0.834862385321
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.834862385321
+pruned tree test accuracy:  0.834862385321
+no pruning test accuracy:  0.871559633028
+training accuracy:  1.0
+validation accuracy:  0.954128440367
+test accuracy:  0.935779816514
+pruned tree train accuracy:  0.990783410138
+pruned tree validation accuracy:  0.963302752294
+pruned tree test accuracy:  0.935779816514
+no pruning test accuracy:  0.899082568807
+training accuracy:  1.0
+validation accuracy:  0.853211009174
+test accuracy:  0.844036697248
+pruned tree train accuracy:  0.976958525346
+pruned tree validation accuracy:  0.853211009174
+pruned tree test accuracy:  0.871559633028
+no pruning test accuracy:  0.798165137615
+[0.8256880733944955, 0.8623853211009175, 0.908256880733945, 0.8532110091743119, 0.8440366972477065, 0.8990825688073395, 0.8990825688073395, 0.8715596330275229, 0.8807339449541285, 0.8807339449541285, 0.8623853211009175, 0.926605504587156, 0.8623853211009175, 0.8899082568807339, 0.8348623853211009, 0.8990825688073395, 0.8715596330275229, 0.8440366972477065, 0.8807339449541285, 0.8807339449541285, 0.8715596330275229, 0.8165137614678899, 0.8165137614678899, 0.8440366972477065, 0.8348623853211009, 0.9174311926605505, 0.8532110091743119, 0.8073394495412844, 0.8532110091743119, 0.8899082568807339, 0.8623853211009175, 0.926605504587156, 0.8990825688073395, 0.8990825688073395, 0.8165137614678899, 0.908256880733945, 0.8990825688073395, 0.8715596330275229, 0.8807339449541285, 0.8348623853211009, 0.8715596330275229, 0.8532110091743119, 0.8899082568807339, 0.7706422018348624, 0.926605504587156, 0.8990825688073395, 0.908256880733945, 0.8899082568807339, 0.8807339449541285, 0.8256880733944955, 0.8348623853211009, 0.8715596330275229, 0.7981651376146789, 0.8256880733944955, 0.908256880733945, 0.8715596330275229, 0.8532110091743119, 0.8532110091743119, 0.8165137614678899, 0.8990825688073395, 0.8440366972477065, 0.8256880733944955, 0.8990825688073395, 0.8256880733944955, 0.8807339449541285, 0.8532110091743119, 0.8899082568807339, 0.8256880733944955, 0.8990825688073395, 0.8990825688073395, 0.8623853211009175, 0.908256880733945, 0.9357798165137615, 0.8623853211009175, 0.8440366972477065, 0.926605504587156, 0.8440366972477065, 0.8623853211009175, 0.8623853211009175, 0.8807339449541285, 0.8715596330275229, 0.9174311926605505, 0.8990825688073395, 0.8073394495412844, 0.8440366972477065, 0.8899082568807339, 0.8715596330275229, 0.8623853211009175, 0.8807339449541285, 0.8532110091743119, 0.8807339449541285, 0.908256880733945, 0.8073394495412844, 0.8807339449541285, 0.908256880733945, 0.8807339449541285, 0.908256880733945, 0.8348623853211009, 0.9357798165137615, 0.8715596330275229]
+[0.7981651376146789, 0.8807339449541285, 0.8440366972477065, 0.8256880733944955, 0.7798165137614679, 0.8990825688073395, 0.8899082568807339, 0.8715596330275229, 0.8715596330275229, 0.9174311926605505, 0.8532110091743119, 0.8990825688073395, 0.8532110091743119, 0.8623853211009175, 0.8715596330275229, 0.8807339449541285, 0.9174311926605505, 0.8165137614678899, 0.8715596330275229, 0.8715596330275229, 0.8532110091743119, 0.8073394495412844, 0.8899082568807339, 0.8899082568807339, 0.8532110091743119, 0.8899082568807339, 0.8807339449541285, 0.8440366972477065, 0.8623853211009175, 0.908256880733945, 0.8623853211009175, 0.8807339449541285, 0.8899082568807339, 0.8348623853211009, 0.8990825688073395, 0.8532110091743119, 0.9357798165137615, 0.7981651376146789, 0.7981651376146789, 0.8899082568807339, 0.8623853211009175, 0.8348623853211009, 0.8715596330275229, 0.8348623853211009, 0.8715596330275229, 0.926605504587156, 0.8715596330275229, 0.8807339449541285, 0.8807339449541285, 0.8532110091743119, 0.8807339449541285, 0.8256880733944955, 0.9174311926605505, 0.8165137614678899, 0.8899082568807339, 0.8532110091743119, 0.8532110091743119, 0.8165137614678899, 0.8440366972477065, 0.8623853211009175, 0.8807339449541285, 0.7889908256880734, 0.8899082568807339, 0.8807339449541285, 0.8623853211009175, 0.8348623853211009, 0.7798165137614679, 0.8715596330275229, 0.944954128440367, 0.8899082568807339, 0.8807339449541285, 0.8623853211009175, 0.9174311926605505, 0.8623853211009175, 0.8165137614678899, 0.8899082568807339, 0.8348623853211009, 0.8532110091743119, 0.8715596330275229, 0.8807339449541285, 0.8807339449541285, 0.8990825688073395, 0.8532110091743119, 0.8256880733944955, 0.8256880733944955, 0.8715596330275229, 0.8623853211009175, 0.8807339449541285, 0.908256880733945, 0.8715596330275229, 0.8807339449541285, 0.9174311926605505, 0.8899082568807339, 0.8440366972477065, 0.8899082568807339, 0.8623853211009175, 0.926605504587156, 0.8715596330275229, 0.8990825688073395, 0.7981651376146789]
+average with pruning 0.869724770642  without:  0.865963302752

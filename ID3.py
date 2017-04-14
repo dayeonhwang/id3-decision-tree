@@ -68,48 +68,6 @@ def ID3(examples, default):
   flag = 0
   return tree
 
-# def prune(node, examples):
-#   '''
-#   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
-#   to improve accuracy on the validation data; the precise pruning strategy is up to you.
-#
-#   *pruning strategy
-#   - start from node -> node's children (top to bottom)
-#   - compare accuracy before/after deleting each node -> delete if accuracy is higher
-#   - greedily grab each node @ each level and repeat recursively'''
-#
-#   numDeletedNode = 0 # keep track of the number of nodes deleted during pruning
-#   q = []  # queue of nodes @ each level
-#   output = {}
-#   q.append(node)
-#   while (len(q) != 0):
-#     n = q.pop(0) #first node
-#     #if (n != None and n.label != None): # if we have nodes & haven't reached a leaf node yet
-#
-#     # save the current node's state before deleting it
-#     old_acc = test(n, examples)
-#     old_node = n
-#     old_children = n.children
-#
-#     # proceed to delete it
-#     n.label = n.mode
-#     n.children = {}
-#     new_acc = test(n, examples)
-#
-#     # if decide to delete it
-#     if new_acc >= old_acc and not n.unclearMode:
-#       numDeletedNode += 1
-#       continue
-#
-#     # if decide to keep it
-#     else:
-#       #add children
-#       if old_children != None:
-#         for c in old_children.itervalues():
-#           q.append(c)
-#
-#     return node
-
 def prune_iter(node, examples):
   '''
   Takes a node and compares accuracy of tree w/ or w/o the node.
@@ -131,7 +89,6 @@ def prune_iter(node, examples):
       return node
   return node
 
-
 def prune(node, examples):
   '''
   Takes in a trained tree and a validation set of examples.  Prunes nodes in order
@@ -140,7 +97,6 @@ def prune(node, examples):
   *pruning strategy - removing subtree rooted at node, making it a leaf node with the most common classification of the training examples affiliated with that node
                     - node removed only if pruned tree performs no worse than the original over the validation set
                     - pruning continues until further pruning is harmful (reduced error pruning algorithm)'''
-
   q = []
   output = []
   q.append(node)
@@ -172,9 +128,6 @@ def test(node, examples):
       accurate_ex += 1
 
   accuracy = accurate_ex / float(total_ex)
-  #print total_ex
-  #print accurate_ex
-  #print accuracy
   return accuracy
 
 def evaluate(node, example):
@@ -302,11 +255,7 @@ def mode(node, examples):
   max_num = max(count)
   if len(([k for k, v in count.items() if v == max_num]))>1:
     node.unclearMode=1
-    #print "unclearMode"
-    
-  # if sum(1 for x in count.values() if x==max_num)>1:
-  #   node.unClearMode=1
-  # return key with the biggest value
+
   return max(count, key=count.get)
 
 def target_attr_mode(examples, target_attr):
@@ -333,14 +282,18 @@ def target_attr_mode(examples, target_attr):
 
 def fill_missing_attr(examples):
   '''
-  Fill any missing attributes (denoted with a value of "?") with mode of attribute's value
+  Fill any missing attributes (denoted with a value of "?") with any first non-"?" value
   '''
+
+  # save an attribute's value that is not '?'
+  first_row = examples[0]
+  replacing_val = [v for k, v in first_row.items() if v != '?']
+
+  # replace '?' with the value we found above
   for e in examples:
     for key, val in e.iteritems():
       if e[key] == "?":
-
-        e[key] = 'n'
-    
+        e[key] = replacing_val[0]
   return examples
 
 def split_examples(examples, target_attr):
