@@ -60,9 +60,10 @@ def testPruningOnHouseData(inFile):
   data = parse.parse(inFile)
   for i in range(100):
     random.shuffle(data)
-    train = data[:len(data)/2]
-    valid = data[len(data)/2:3*len(data)/4]
-    test = data[3*len(data)/4:]
+    print "length of data is:" + str(len(data)) #435
+    train = data[:len(data)/4] #0-50 (50%)
+    valid = data[len(data)/4:3*len(data)/4] #50-75 (25%)
+    test = data[3*len(data)/4:] #75-100 (25%)
   
     tree = ID3.ID3(train, 'democrat')
     acc = ID3.test(tree, train)
@@ -80,6 +81,7 @@ def testPruningOnHouseData(inFile):
     acc = ID3.test(tree, test)
     print "pruned tree test accuracy: ",acc
     withPruning.append(acc)
+    #withoutPruning
     tree = ID3.ID3(train+valid, 'democrat')
     acc = ID3.test(tree, test)
     print "no pruning test accuracy: ",acc

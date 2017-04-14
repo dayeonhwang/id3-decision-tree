@@ -139,11 +139,14 @@ def evaluate(node, example):
   while len(node.children)!=0: # while you havent reached a leaf
     best_attr = node.split_attr # find which attribute you split on
     ex_split_val = example[best_attr] # find what value the example had for this attribute
-    if ex_split_val =='?':
-      if not 'y' in node.children.keys():
-        print 'error!'
-        print  node.children
-      ex_split_val = 'y'
+    #if ex_split_val =='?':
+    #  if not 'y' in node.children.keys():
+    #    print 'error!'
+    #    print  node.children
+    #  ex_split_val = 'y'
+    if not ex_split_val in node.children.keys():
+      ex_split_val = node.children.keys()[0]
+
     node = node.children[ex_split_val] # go to the child node whose value matches ####
     nodeVisited += 1
 
@@ -293,8 +296,14 @@ def fill_missing_attr(examples):
   for e in examples:
     for key, val in e.iteritems():
       if e[key] == "?":
-        e[key] = replacing_val[0]
+        e[key] = find_val(examples, key)
+        #e[key] = replacing_val[0]
   return examples
+
+def find_val(examples, attr):
+  for e in examples:
+    if e[attr] != '?':
+      return e[attr]
 
 def split_examples(examples, target_attr):
   '''
